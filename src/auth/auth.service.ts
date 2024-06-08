@@ -32,7 +32,7 @@ export class AuthService {
       id: user.id,
       role: user.role,
     });
-    return { access_token };
+    return { access_token, user: user };
   }
 
   async signup(signupDto: SignupDto) {
@@ -63,4 +63,7 @@ export class AuthService {
   //   }
   //   return null;
   // }
+  async getUser() {
+    return await this.userRepository.find({});
+  }
 }

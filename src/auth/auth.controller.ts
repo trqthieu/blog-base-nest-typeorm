@@ -8,13 +8,14 @@ import {
   Body,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './dtos/login.dto';
 import { SignupDto } from './dtos/signup.dto';
 import { Public } from './auth.decorator';
 
 @Controller('auth')
 @ApiTags('auth')
+@ApiBearerAuth()
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -28,6 +29,11 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() signupDto: SignupDto) {
     return await this.authService.signup(signupDto);
+  }
+
+  @Get('get-users')
+  async getUser() {
+    return await this.authService.getUser();
   }
 
   // @Get()

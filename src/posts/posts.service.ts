@@ -37,12 +37,21 @@ export class PostsService {
   }
 
   async findAll() {
-    return await this.PostRepository.find({});
+    return await this.PostRepository.find({
+      relations: {
+        category: true,
+        user: true,
+      },
+    });
   }
 
   async findOne(id: number) {
     return await this.PostRepository.findOne({
       where: { id },
+      relations: {
+        category: true,
+        user: true,
+      },
     });
   }
 

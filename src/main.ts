@@ -5,7 +5,7 @@ import * as session from 'express-session';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(new ValidationPipe());
   app.use(
@@ -24,6 +24,7 @@ async function bootstrap() {
     .setDescription('The blogs API description')
     .setVersion('1.0')
     .addTag('blogs')
+    .setExternalDoc('Postman Collection', '/swagger-json')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);

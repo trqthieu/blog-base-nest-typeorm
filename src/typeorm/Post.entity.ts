@@ -37,6 +37,7 @@ export class Post {
 
   @Column({
     nullable: true,
+    type: 'longtext',
   })
   content: string;
 
